@@ -1,37 +1,31 @@
-var createSvgAccordingToShape = function(divID, elementName){
-	return d3.select('#'+divID)
+var createSvg = function(elementName){
+	return d3.select('.shape')
 		.append('svg')
 		.attr('width',100)
 		.attr('height',100)
-		.style('padding','5px')
+		.style('padding','25px')
 		.append(elementName);
 }
 
-var drawLine = function(){
-	createSvgAccordingToShape('line','line').attr('x1',0)
-		.attr('y1',100)
-		.attr('x2',100)
-		.attr('y2',0);
+var drawShape = function(shapeProperty){
+	let element = createSvg(shapeProperty['element']);
+	let attributes = shapeProperty['attr']
+	for(eachAttr in attributes)
+		element.attr(eachAttr, attributes[eachAttr]);
+
+	let styles = shapeProperty['style'];
+	for(eachStyle in styles)
+		element.style(eachStyle,styles[eachStyle]);
 }
 
-var drawCircle = function(){
-	createSvgAccordingToShape('circle','circle').attr('cx',50)
-		.attr('cy',50)
-		.attr('r',50);
-}
-
-var drawSquare = function(){
-	createSvgAccordingToShape('square','rect').attr('width',100)
-		.attr('height',100);
-}
-
-var drawTriangle = function(){
-	createSvgAccordingToShape('triangle','polygon').attr('points','0,100 100,100 50,0')
-}
 var show = function(){
-	drawLine();
-	drawCircle();
-	drawSquare();
-	drawTriangle();
+	let	shapesWithProperties = [{element:'line', attr:{x1:0,y1:100,x2:100,y2:0}, style:{stroke:'grey'}},
+								{element:'circle', attr:{cx:50,cy:50,r:50}, style:{stroke:'red'}},
+								{element:'rect', attr:{width:100,height:100}, style:{stroke:'blue'}},
+								{element:'polygon',attr:{points: "0,100 100,100 50,0"},style:{stroke:'green'}}];
+
+	shapesWithProperties.forEach(function(eachShape){
+		drawShape(eachShape);
+	});
 }
 window.onload = show;

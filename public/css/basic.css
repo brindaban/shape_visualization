@@ -1,22 +1,5 @@
 .shape{
     stroke-width: 2px;
     fill: none;
-    display: inline-block;
-    margin: 10px;
-}
-
-#line{
-    stroke: grey;
-}
-
-#circle {
-    stroke: red;
-}
-
-#square{
-    stroke: blue;
-}
-
-#triangle{
-    stroke: green;
+    /*margin: 20px;*/
 }
